@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+    <title>{% block title %}Main{% endblock %}</title>
+</head>
+<body>
+    <div class="header">
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Задачник</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/tasks/add">Добавить задачу</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if isAdmin %}
+                        <li><a href="/admin/logout">Выйти</a></li>
+                        {% else %}
+                        <li><a href="/admin/login">Войти</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="middle">
+        <div class="container">
+            {% block content %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Welcome</h1>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Список задач{% if page > 1%} - страница {{ page }}{% endif %}{% endblock %}
+
+{% block content %}
+
+    <h1>Задания</h1>
+
+    {{ sortpanel | raw }}
+
+    <div class="row">
+        <div class="col-xs-12">
+            {% if posts %}
+                {% for post in posts %}
+
+                    <div class="panel {% if post.done %}panel-success{% else %}panel-warning{% endif %}">
+                        <div class="panel-heading">
+                            <span class="badge">#{{ post.id }}</span>
+                            Имя пользователя: <b>{{ post.username }}</b>
+                            {% if post.email %}
+                                Email: <b>{{ post.email }}</b>
+                            {% endif %}
+                            
+                            <div class="pull-right">
+                                Статуc: 
+                                {% if post.done %}
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <b>Выполнено</b>
+                                {% else %}
+                                <b>Новая</b>
+                                {% endif %}
+                            </div>
+                            {% if post.updated %}
+                            <div class="pull-right status-edit">
+                                Отред.: 
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <b>Да</b>
+                            </div>    
+                            {% endif %}                            
+                        </div>
+                        <div class="panel-body">
+                            <div><b>Текст задачи:</b></div>
+                            <p>{{ post.content }}</p>
+                            {% if isAdmin %}
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="pull-right">
+                                        <a href="/tasks/edit/{{ post.id }}" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                            Редактировать
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                {% endfor %}
+            {% else %}
+                <p>Нет записей</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {{ pagination | raw }}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% if data %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Сотрировать по:
+                <div class="btn-group" role="group" aria-label="...">
+                    {% for item in data %}
+                    <a href="{{ item.link }}" type="button" class="btn btn-default">
+                        {{ item.title }}
+                        {% if item.dir == 'asc' %}
+                        <span class="glyphicon glyphicon-arrow-down"></span>
+                        {% endif %}
+                        {% if item.dir == 'desc' %}
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                        {% endif %}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

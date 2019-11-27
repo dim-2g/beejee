@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление задачи{% endblock %}
+
+{% block content %}
+
+<h1>Добавить задачу</h1>
+{% if errors %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="alert alert-danger" role="alert">
+            <ul class="form-add-errors">
+            {% for error in errors%}
+            <li>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{ error }}
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if success %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="alert alert-success" role="alert">
+            Задача размещена! Перейти к <a href="/">списку задач</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<form method="post">
+    <div class="form-group">
+        <label for="f-username">Имя пользователя</label>
+        <input type="text" class="form-control" id="f-username" placeholder="Имя пользователя" name="username" value="{{ data.username }}">
+    </div>
+    <div class="form-group">
+        <label for="f-email">Email</label>
+        <input type="text" class="form-control" id="f-email" placeholder="Email" name="email" value="{{ data.email }}">
+    </div>
+    <div class="form-group">
+        <label for="f-text">Текст задачи</label>
+        <textarea name="text" class="form-control"  id="f-text" cols="30" rows="10" placeholder="Текст задачи">{{ data.text }}</textarea>
+    </div>
+    <input type="hidden" name="action" value="add" />
+    <button type="submit" class="btn btn-default">Отправить</button>
+</form>
+
+{% endblock %}
